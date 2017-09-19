@@ -1,5 +1,10 @@
-// LinkedList.cpp
-
+/*
+LinkedList.cpp
+Easton Tuttle
+Computer Science II
+Lab 02 - Lists
+September 18, 2017
+*/
 // tom bailey   0745  5 oct 2010
 // Definition of methods for the List class.
 
@@ -63,6 +68,69 @@ double List::removeFirst()
 	first_ = first_->next_;
 	delete tempPtr;
 	return item;
+}
+
+int List::size()
+{
+	int size = 0;
+
+	if (!empty())
+	{
+		// Account for the first entry.
+		size++;
+		Node * ptr = first_->next_;
+		while (ptr != NULL)
+		{
+			size++;
+			ptr = ptr->next_;
+		}
+	}
+
+	return size;
+}
+
+double List::sum()
+{
+	double sum = 0.0;
+
+	if (!empty())
+	{
+		// Add the first entry to the sum.
+		sum = first_->entry_;
+		Node * ptr = first_->next_;
+		while (ptr != NULL)
+		{
+			sum = sum + ptr->entry_;
+			ptr = ptr->next_;
+		}
+	}
+
+	return sum;
+}
+
+void List::insertAsLast(double x)
+{
+	// If the list is not empty, navigate to the final node and insert the entry there.
+	if (!empty())
+	{
+		// Create the new node to be added.
+		Node * newNode = new Node(x, NULL);
+		// Set a pointer to first in order to traverse through the list.
+		Node * ptr = first_;
+		// Traverse through the list.
+		while (ptr->next_ != NULL)
+		{
+			ptr = ptr->next_;
+		}
+		// Assign the new node to the final location in the list.
+		ptr->next_ = newNode;
+
+	}
+	// If the list is empty, create a new node with the entry.
+	else
+	{
+		first_ = new Node(x, first_);
+	}
 }
 
 
